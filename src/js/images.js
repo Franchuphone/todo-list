@@ -7,6 +7,6 @@ function importAll( r ) {
     return map;
 }
 
-const images = importAll( require.context( './img', false, /\.(png|jpe?g|svg)$/ ) );
+const images = importAll( require.context( '/src/img', false, /\.(png|jpe?g|svg)$/ ) );
 
 export default images;

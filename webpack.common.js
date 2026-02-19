@@ -1,9 +1,9 @@
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import HtmlWebpackPlugin from "html-webpack-plugin";
+// import CssMinimizerPlugin from "css-minimizer-webpack-plugin";
+// import MiniCssExtractPlugin from "mini-css-extract-plugin";
 
-const CssMinimizerPlugin = require( "css-minimizer-webpack-plugin" );
-const MiniCssExtractPlugin = require( "mini-css-extract-plugin" );
 const __filename = fileURLToPath( import.meta.url );
 const __dirname = path.dirname( __filename );
 
@@ -18,10 +18,10 @@ export default {
         new HtmlWebpackPlugin( {
             template: "./src/template.html",
         } ),
-        new MiniCssExtractPlugin( {
-            filename: "[name].css",
-            chunkFilename: "[id].css",
-        } ),
+        // new MiniCssExtractPlugin( {
+        //     filename: "[name].css",
+        //     chunkFilename: "[id].css",
+        // } ),
     ],
     module: {
         rules: [
@@ -29,10 +29,10 @@ export default {
                 test: /\.css$/i,
                 use: [ "style-loader", "css-loader" ],
             },
-            {
-                test: /\.s?css$/,
-                use: [ MiniCssExtractPlugin.loader, "css-loader", "sass-loader" ],
-            },
+            // {
+            //     test: /\.s?css$/,
+            //     use: [ MiniCssExtractPlugin.loader, "css-loader", "sass-loader" ],
+            // },
             {
                 test: /\.html$/i,
                 use: [ "html-loader" ],
@@ -55,10 +55,10 @@ export default {
             },
         ],
     },
-    optimization: {
-        minimizer: [
-            `...`,
-            new CssMinimizerPlugin(),
-        ],
-    },
+    // optimization: {
+    //     minimizer: [
+    //         `...`,
+    //         new CssMinimizerPlugin(),
+    //     ],
+    // },
 };

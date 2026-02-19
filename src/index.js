@@ -1,3 +1,3 @@
 import "./css/modern-normalize.css"
-import "./css/style.css"
-import images from "./js/images.js";
+import "./css/main-style.css"
+import images from "/src/js/images.js";
