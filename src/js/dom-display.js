@@ -1,6 +1,7 @@
 // import { categoriesList } from "./categories";
 import images from "/src/js/images.js";
 import * as check from "./checkers";
+import { deleteListener } from "./listeners";
 
 export function displayMenu( listName ) {
     for ( let i = 0; i < listName.length; i++ ) {
@@ -8,7 +9,7 @@ export function displayMenu( listName ) {
         const categoryDiv = document.createElement( "div" );
         displayCategoryMenu( listName, i, categoryDiv );
 
-        for ( let j = 0; j < listName[ i ].list.length; j++ ) {
+        for ( let j = 0; j < listName[ i ].subcats.length; j++ ) {
             displaySubcategoryMenu( listName, i, j, categoryDiv );
         }
     }
@@ -30,6 +31,7 @@ export function displayMain( listName ) {
         const deleteBtn = document.createElement( "button" );
         const imgDeleteBtn = document.createElement( "img" );
 
+        // Edit and delete buttons with listeners
         imgDeleteBtn.src = images[ "trash.svg" ];
         imgDeleteBtn.alt = "Trash icon";
         deleteBtn.id = "delete-btn";
@@ -38,12 +40,15 @@ export function displayMain( listName ) {
         imgEditBtn.alt = "Pencil icon";
         editBtn.id = "edit-btn";
         editBtn.append( imgEditBtn );
+        deleteListener( categoryDiv, imgDeleteBtn, listName[ i ] )
+
+
         categoryBtnDiv.dataset.id = categoryId;
         categoryBtnDiv.classList.add( "category-interactions" );
         categoryBtnDiv.append( editBtn, deleteBtn );
         categoryDescription.dataset.id = categoryId;
         if ( listName[ i ].description ) categoryDescription.textContent = listName[ i ].description;
-        else displayListItems( listName[ i ].list, categoryDescription )
+        else displayListItems( listName[ i ].subcats, categoryDescription )
         categoryName.textContent = listName[ i ].name;
         categoryDetails.dataset.id = categoryId;
         categoryDetails.append( categoryName, categoryDescription, categoryBtnDiv );
@@ -136,9 +141,9 @@ function displaySubcategoryMenu( listName, i, j, categoryDiv ) {
     const subCategoryBtn = document.createElement( "button" );
     const subCategoryIcon = document.createElement( "img" );
 
-    subCategoryBtn.textContent = listName[ i ].list[ j ].name;
+    subCategoryBtn.textContent = listName[ i ].subcats[ j ].name;
     subCategoryBtn.dataset.type = "subcategory";
-    subCategoryBtn.dataset.id = listName[ i ].list[ j ].id;
+    subCategoryBtn.dataset.id = listName[ i ].subcats[ j ].id;
     subCategoryIcon.src = images[ "chemical-weapon.svg" ];
     subCategoryIcon.alt = "Sub category icon";
     subCategoryDiv.classList.add( "subcategory-content" );
@@ -153,7 +158,7 @@ function displayListItems( listName, div ) {
         inputList.type = "checkbox";
         inputList.name = `list${ j }`;
         displayCategoryChecked( inputList );
-        inputLabel.textContent = listName[ j ];
+        inputLabel.textContent = listName[ j ].description;
         inputLabel.for = `list${ j }`;
         div.append( inputList, inputLabel );
         div.classList.add( "list-display" );

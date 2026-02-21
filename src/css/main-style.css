@@ -1,5 +1,5 @@
 :root {
-    --color-pri: #aaa8a827;
+    --color-pri: #dfdfeb4f;
     --color-sec: #b8afaf;
     --color-tri: #3a3939;
     --color-valid1: #679464;
@@ -167,6 +167,10 @@ nav {
     display: grid;
     grid-template-columns: subgrid;
     grid-template-rows: subgrid;
+
+    button {
+        text-align: left;
+    }
 }
 
 .timer-menu {
@@ -220,12 +224,10 @@ main {
     flex-direction: column;
     gap: calc(2 * var(--size-pri));
     align-items: center;
-    transition: opacity 0.5s ease-in-out;
-
 }
 
-.animate {
-    opacity: 1;
+main > div {
+    animation: fadeIn 1s ease-in-out;
 }
 
 .category-card {
@@ -303,8 +305,11 @@ details p {
 
 details p input {
     text-align: center;
-    width: 20px;
-    height: 20px;
+    position: relative;
+    inset: 0.1em 1em;
+    margin-right: 2em;
+    width: 1em;
+    aspect-ratio: 1 / 1;
     appearance: none;
     border-radius: 10%;
     border: 1px solid var(--color-invalid1);
@@ -367,4 +372,21 @@ details p input:checked {
     font-weight: normal;
     font-style: normal;
     font-display: swap;
+}
+
+
+@keyframes fadeIn {
+    0% {
+        transition: block-size 1s, content-visibility 1s;
+        transition-behavior: allow-discrete;
+        opacity: 0;
+        block-size: 0;
+        content-visibility: hidden;
+    }
+
+    100% {
+        opacity: 1;
+        block-size: auto;
+        content-visibility: visible;
+    }
 }
