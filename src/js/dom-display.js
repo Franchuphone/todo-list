@@ -1,26 +1,51 @@
-// import { categoriesList } from "./categories";
 import images from "/src/js/images.js";
 import * as check from "./checkers";
-import { deleteListener } from "./listeners";
+import * as listeners from "./listeners";
 
-export function displayMenu( listName ) {
-    for ( let i = 0; i < listName.length; i++ ) {
+export function displayMenu( list ) {
+    const navDiv = document.querySelector( ".nav-content" );
+    navDiv.innerHTML = "";
+    for ( let i = 0; i < list.length; i++ ) {
 
+        const projectDiv = document.createElement( "div" );
         const categoryDiv = document.createElement( "div" );
-        displayCategoryMenu( listName, i, categoryDiv );
+        const categoryBtn = document.createElement( "button" );
+        const categoryIcon = document.createElement( "img" );
 
-        for ( let j = 0; j < listName[ i ].subcats.length; j++ ) {
-            displaySubcategoryMenu( listName, i, j, categoryDiv );
+        categoryBtn.textContent = list[ i ].name;
+        categoryBtn.dataset.type = "category";
+        categoryBtn.dataset.id = list[ i ].id;
+        categoryIcon.src = images[ "chart-tree.svg" ];
+        categoryIcon.alt = "Category icon";
+        categoryDiv.classList.add( "category-content" );
+        categoryDiv.append( categoryIcon, categoryBtn );
+        projectDiv.classList.add( "project-content" );
+        projectDiv.append( categoryDiv );
+        navDiv.append( projectDiv );
+
+        for ( let j = 0; j < list[ i ].subcats.length; j++ ) {
+            const subCategoryDiv = document.createElement( "div" );
+            const subCategoryBtn = document.createElement( "button" );
+            const subCategoryIcon = document.createElement( "img" );
+
+            subCategoryBtn.textContent = list[ i ].subcats[ j ].name;
+            subCategoryBtn.dataset.type = "subcategory";
+            subCategoryBtn.dataset.id = list[ i ].subcats[ j ].id;
+            subCategoryIcon.src = images[ "chemical-weapon.svg" ];
+            subCategoryIcon.alt = "Sub category icon";
+            subCategoryDiv.classList.add( "subcategory-content" );
+            subCategoryDiv.append( subCategoryIcon, subCategoryBtn );
+            projectDiv.append( subCategoryDiv );
         }
     }
 }
 
-export function displayMain( listName ) {
+export function displayMain( list, parentCat ) {
     const mainDiv = document.querySelector( "main" );
     mainDiv.innerHTML = "";
-
-    for ( let i = 0; i < listName.length; i++ ) {
-        const categoryId = listName[ i ].id;
+    // console.log( list )
+    for ( let i = 0; i < list.length; i++ ) {
+        const categoryId = list[ i ].id;
         const categoryDiv = document.createElement( "div" );
         const categoryDetails = document.createElement( "details" );
         const categoryName = document.createElement( "summary" );
@@ -40,22 +65,24 @@ export function displayMain( listName ) {
         imgEditBtn.alt = "Pencil icon";
         editBtn.id = "edit-btn";
         editBtn.append( imgEditBtn );
-        deleteListener( categoryDiv, imgDeleteBtn, listName[ i ] )
+        listeners.deleteListener( categoryDiv, deleteBtn, parentCat, list[ i ].id );
 
 
         categoryBtnDiv.dataset.id = categoryId;
         categoryBtnDiv.classList.add( "category-interactions" );
         categoryBtnDiv.append( editBtn, deleteBtn );
         categoryDescription.dataset.id = categoryId;
-        if ( listName[ i ].description ) categoryDescription.textContent = listName[ i ].description;
-        else displayListItems( listName[ i ].subcats, categoryDescription )
-        categoryName.textContent = listName[ i ].name;
+
+        categoryName.textContent = list[ i ].name;
         categoryDetails.dataset.id = categoryId;
         categoryDetails.append( categoryName, categoryDescription, categoryBtnDiv );
         categoryDiv.dataset.id = categoryId;
         categoryDiv.classList.add( "category-card" );
         categoryDiv.append( categoryDetails );
         mainDiv.append( categoryDiv );
+
+        if ( list[ i ].description ) categoryDescription.textContent = list[ i ].description;
+        else displayListItems( list[ i ], list[ i ].subcats, categoryDescription );
     }
 }
 
@@ -121,57 +148,61 @@ export function openSubcatDetails( id ) {
 //     }
 // }
 
-function displayCategoryMenu( listName, i, categoryDiv ) {
-    const navDiv = document.querySelector( ".nav-content" );
-    const categoryBtn = document.createElement( "button" );
-    const categoryIcon = document.createElement( "img" );
+// function displayCategoryMenu( list, i, categoryDiv ) {
+//     const categoryBtn = document.createElement( "button" );
+//     const categoryIcon = document.createElement( "img" );
 
-    categoryBtn.textContent = listName[ i ].name;
-    categoryBtn.dataset.type = "category";
-    categoryBtn.dataset.id = listName[ i ].id;
-    categoryIcon.src = images[ "chart-tree.svg" ];
-    categoryIcon.alt = "Category icon";
-    categoryDiv.classList.add( "category-content" );
-    categoryDiv.append( categoryIcon, categoryBtn );
-    navDiv.append( categoryDiv );
-}
+//     categoryBtn.textContent = list[ i ].name;
+//     categoryBtn.dataset.type = "category";
+//     categoryBtn.dataset.id = list[ i ].id;
+//     categoryIcon.src = images[ "chart-tree.svg" ];
+//     categoryIcon.alt = "Category icon";
+//     categoryDiv.classList.add( "category-content" );
+//     categoryDiv.append( categoryIcon, categoryBtn );
+//     navDiv.append( categoryDiv );
+// }
 
-function displaySubcategoryMenu( listName, i, j, categoryDiv ) {
-    const subCategoryDiv = document.createElement( "div" );
-    const subCategoryBtn = document.createElement( "button" );
-    const subCategoryIcon = document.createElement( "img" );
+// function displaySubcategoryMenu( list, i, j, categoryDiv ) {
+//     const subCategoryDiv = document.createElement( "div" );
+//     const subCategoryBtn = document.createElement( "button" );
+//     const subCategoryIcon = document.createElement( "img" );
 
-    subCategoryBtn.textContent = listName[ i ].subcats[ j ].name;
-    subCategoryBtn.dataset.type = "subcategory";
-    subCategoryBtn.dataset.id = listName[ i ].subcats[ j ].id;
-    subCategoryIcon.src = images[ "chemical-weapon.svg" ];
-    subCategoryIcon.alt = "Sub category icon";
-    subCategoryDiv.classList.add( "subcategory-content" );
-    subCategoryDiv.append( subCategoryIcon, subCategoryBtn );
-    categoryDiv.append( subCategoryDiv );
-}
+//     subCategoryBtn.textContent = list[ i ].subcats[ j ].name;
+//     subCategoryBtn.dataset.type = "subcategory";
+//     subCategoryBtn.dataset.id = list[ i ].subcats[ j ].id;
+//     subCategoryIcon.src = images[ "chemical-weapon.svg" ];
+//     subCategoryIcon.alt = "Sub category icon";
+//     subCategoryDiv.classList.add( "subcategory-content" );
+//     subCategoryDiv.append( subCategoryIcon, subCategoryBtn );
+//     categoryDiv.append( subCategoryDiv );
+// }
 
-function displayListItems( listName, div ) {
-    for ( let j = 0; j < listName.length; j++ ) {
+function displayListItems( parentCat, list, div ) {
+    for ( let j = 0; j < list.length; j++ ) {
         const inputList = document.createElement( "input" );
-        const inputLabel = document.createElement( "label" )
+        const inputLabel = document.createElement( "label" );
+        inputList.dataset.id = list[ j ].id;
         inputList.type = "checkbox";
         inputList.name = `list${ j }`;
-        displayCategoryChecked( inputList );
-        inputLabel.textContent = listName[ j ].description;
+        if ( list[ j ].getState() ) inputList.checked = true;
+        // console.log( parentCat.getState() )
+        listeners.handleCheckbox( inputList, list[ j ], parentCat );
+        // displayCategoryChecked( inputList, parentCat );
+        // console.log( list, parentCat )
+        inputLabel.dataset.id = list[ j ].id;
+        inputLabel.textContent = list[ j ].description;
         inputLabel.for = `list${ j }`;
         div.append( inputList, inputLabel );
         div.classList.add( "list-display" );
+        // console.log( parentCat.getId() )
+        displayCategoryChecked( parentCat );
     }
 }
 
-function displayCategoryChecked( div ) {
-    div.addEventListener( "click", () => {
-        const divChecked = document.querySelector( `div[data-id="${ div.parentElement.dataset.id }"]` );
-        if ( check.checkedSimilarBoxes( div.parentElement.dataset.id ) ) {
-            divChecked.classList.add( "category-card-checked" );
-        }
-        else divChecked.classList.remove( "category-card-checked" )
-    } )
-}
+// Toggle visual validation state on subcategory
 
+export function displayCategoryChecked( parentCat ) {
+    const divChecked = document.querySelector( `main > div[data-id='${ parentCat.getId() }']` );
+    divChecked.classList.toggle( "category-card-checked", parentCat.getState() )
+    if ( divChecked.classList.contains( "category-card-checked" ) && ( !parentCat.getState() ) ) divChecked.classList.remove( "category-card-checked" );
+}

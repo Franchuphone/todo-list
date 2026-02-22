@@ -75,6 +75,8 @@ header {
 
 .user-header,
 .timer-menu,
+.timer-content,
+.project-content,
 .nav-content,
 .category-content,
 .subcategory-content {
@@ -173,8 +175,9 @@ nav {
     }
 }
 
+.timer-content,
 .timer-menu {
-    grid-row: 2 / span1;
+    grid-row: 2 / 3;
 
     button {
         font-weight: var(--weight-sec);
@@ -182,6 +185,7 @@ nav {
 }
 
 
+.timer-content,
 .timer-menu,
 .nav-content,
 main {
@@ -196,11 +200,20 @@ main {
     row-gap: calc(2 * var(--size-pri));
 }
 
+.project-content,
+.timer-menu {
+    box-shadow: 0.6em 0.6em 0.6em -0.6em var(--color-tri);
+    border-radius: var(--radius-pri);
+    padding-bottom: var(--size-pri);
+}
+
+.project-content,
 .category-content,
 .subcategory-content {
     display: grid;
     grid-template-columns: subgrid;
     row-gap: calc(0.5 * var(--size-pri));
+
 }
 
 .category-content > button:nth-child(2) {

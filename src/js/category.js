@@ -18,13 +18,6 @@ export class Category {
         this.subcats.push( subcat );
     }
 
-    getAllSubcats() {
-        return this.subcats;
-    }
-
-    getSubcat( id ) {
-        return this.subcats.find( item => item.id === id );
-    }
 
     delete( id ) {
         const index = this.subcats.findIndex( item => item.id === id )
@@ -36,13 +29,28 @@ export class Category {
         this.lists.splice( index, 1 )
     }
 
+    cleanEntries() {
+        this.name = this.name.charAt( 0 ).toUpperCase() + this.name.toLowerCase().slice( 1 );
+        this.description = this.description.charAt( 0 ).toUpperCase() + this.description.toLowerCase().slice( 1 );
+    }
+
+    getAllSubcats() {
+        return this.subcats;
+    }
+
+    getSubcat( id ) {
+        return this.subcats.find( item => item.id === id );
+    }
+
+    getId() {
+        return this.id
+    }
+
 }
 
 
 
-const cleanWords = () => {
-    this.name = this.name.charAt( 0 ).toUpperCase() + this.name.toLowerCase().slice( 1 );
-}
+
 
 // const commonCategory = new Category( "Common", "Your main place where all your projects can begin" )
 // let catList = [];

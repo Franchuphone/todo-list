@@ -1,4 +1,5 @@
 import { Category } from "./category";
+import * as dom from "./dom-display";
 
 export class Controller {
 
@@ -12,6 +13,11 @@ export class Controller {
         return cat;
     }
 
+    delete( id ) {
+        const index = this.cats.findIndex( item => item.id === id )
+        this.cats.splice( index, 1 );
+    }
+
     getAllCats() {
         return this.cats;
     }
@@ -19,10 +25,4 @@ export class Controller {
     getCat( id ) {
         return this.cats.find( item => item.id === id );
     }
-
-    deleteCat( id ) {
-        const index = this.cats.findIndex( item => item.id === id )
-        this.projects.splice( index, 1 );
-    }
-
 }
