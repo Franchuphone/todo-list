@@ -46,6 +46,14 @@ export class Category {
         return this.id
     }
 
+    getDescription() {
+        return this.description;
+    }
+
+    getName() {
+        return this.name;
+    }
+
 }
 
 

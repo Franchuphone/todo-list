@@ -2,6 +2,8 @@ import images from "/src/js/images.js";
 import * as check from "./checkers";
 import * as listeners from "./listeners";
 
+// Create the lateral display for categories and subcategories
+
 export function displayMenu( list ) {
     const navDiv = document.querySelector( ".nav-content" );
     navDiv.innerHTML = "";
@@ -12,9 +14,9 @@ export function displayMenu( list ) {
         const categoryBtn = document.createElement( "button" );
         const categoryIcon = document.createElement( "img" );
 
-        categoryBtn.textContent = list[ i ].name;
+        categoryBtn.textContent = list[ i ].getName();
         categoryBtn.dataset.type = "category";
-        categoryBtn.dataset.id = list[ i ].id;
+        categoryBtn.dataset.id = list[ i ].getId();
         categoryIcon.src = images[ "chart-tree.svg" ];
         categoryIcon.alt = "Category icon";
         categoryDiv.classList.add( "category-content" );
@@ -23,29 +25,35 @@ export function displayMenu( list ) {
         projectDiv.append( categoryDiv );
         navDiv.append( projectDiv );
 
+        listeners.handleMenuClick( categoryDiv, list[ i ] );
+
         for ( let j = 0; j < list[ i ].subcats.length; j++ ) {
             const subCategoryDiv = document.createElement( "div" );
             const subCategoryBtn = document.createElement( "button" );
             const subCategoryIcon = document.createElement( "img" );
 
-            subCategoryBtn.textContent = list[ i ].subcats[ j ].name;
+            subCategoryBtn.textContent = list[ i ].subcats[ j ].getName();
             subCategoryBtn.dataset.type = "subcategory";
-            subCategoryBtn.dataset.id = list[ i ].subcats[ j ].id;
+            subCategoryBtn.dataset.id = list[ i ].subcats[ j ].getId();
             subCategoryIcon.src = images[ "chemical-weapon.svg" ];
             subCategoryIcon.alt = "Sub category icon";
             subCategoryDiv.classList.add( "subcategory-content" );
             subCategoryDiv.append( subCategoryIcon, subCategoryBtn );
             projectDiv.append( subCategoryDiv );
+
+            listeners.handleMenuClick( subCategoryDiv, list[ i ], list[ i ].subcats[ j ] );
         }
     }
 }
+
+// Create the main structure display for categories and subcategories and their content
 
 export function displayMain( list, parentCat ) {
     const mainDiv = document.querySelector( "main" );
     mainDiv.innerHTML = "";
     // console.log( list )
     for ( let i = 0; i < list.length; i++ ) {
-        const categoryId = list[ i ].id;
+        const categoryId = list[ i ].getId();
         const categoryDiv = document.createElement( "div" );
         const categoryDetails = document.createElement( "details" );
         const categoryName = document.createElement( "summary" );
@@ -56,7 +64,8 @@ export function displayMain( list, parentCat ) {
         const deleteBtn = document.createElement( "button" );
         const imgDeleteBtn = document.createElement( "img" );
 
-        // Edit and delete buttons with listeners
+        // Create edit and delete buttons with listeners
+
         imgDeleteBtn.src = images[ "trash.svg" ];
         imgDeleteBtn.alt = "Trash icon";
         deleteBtn.id = "delete-btn";
@@ -65,7 +74,7 @@ export function displayMain( list, parentCat ) {
         imgEditBtn.alt = "Pencil icon";
         editBtn.id = "edit-btn";
         editBtn.append( imgEditBtn );
-        listeners.deleteListener( categoryDiv, deleteBtn, parentCat, list[ i ].id );
+        listeners.deleteListener( categoryDiv, deleteBtn, parentCat, list[ i ].getId() );
 
 
         categoryBtnDiv.dataset.id = categoryId;
@@ -73,7 +82,7 @@ export function displayMain( list, parentCat ) {
         categoryBtnDiv.append( editBtn, deleteBtn );
         categoryDescription.dataset.id = categoryId;
 
-        categoryName.textContent = list[ i ].name;
+        categoryName.textContent = list[ i ].getName();
         categoryDetails.dataset.id = categoryId;
         categoryDetails.append( categoryName, categoryDescription, categoryBtnDiv );
         categoryDiv.dataset.id = categoryId;
@@ -81,7 +90,7 @@ export function displayMain( list, parentCat ) {
         categoryDiv.append( categoryDetails );
         mainDiv.append( categoryDiv );
 
-        if ( list[ i ].description ) categoryDescription.textContent = list[ i ].description;
+        if ( list[ i ].description ) categoryDescription.textContent = list[ i ].getDescription();
         else displayListItems( list[ i ], list[ i ].subcats, categoryDescription );
     }
 }
@@ -97,6 +106,8 @@ export function displayUserHeader( user ) {
     userIcon.alt = "User icon";
     userHeader.append( userIcon, userName );
 }
+
+// Opens main corresponding subcategory on menu click
 
 export function openSubcatDetails( id ) {
     const details = document.querySelectorAll( "main details" )
@@ -177,11 +188,13 @@ export function openSubcatDetails( id ) {
 //     categoryDiv.append( subCategoryDiv );
 // }
 
+// Creates main structure display for lowest level items
+
 function displayListItems( parentCat, list, div ) {
     for ( let j = 0; j < list.length; j++ ) {
         const inputList = document.createElement( "input" );
         const inputLabel = document.createElement( "label" );
-        inputList.dataset.id = list[ j ].id;
+        inputList.dataset.id = list[ j ].getId();
         inputList.type = "checkbox";
         inputList.name = `list${ j }`;
         if ( list[ j ].getState() ) inputList.checked = true;
@@ -189,8 +202,8 @@ function displayListItems( parentCat, list, div ) {
         listeners.handleCheckbox( inputList, list[ j ], parentCat );
         // displayCategoryChecked( inputList, parentCat );
         // console.log( list, parentCat )
-        inputLabel.dataset.id = list[ j ].id;
-        inputLabel.textContent = list[ j ].description;
+        inputLabel.dataset.id = list[ j ].getId();
+        inputLabel.textContent = list[ j ].getDescription();
         inputLabel.for = `list${ j }`;
         div.append( inputList, inputLabel );
         div.classList.add( "list-display" );
@@ -206,3 +219,4 @@ export function displayCategoryChecked( parentCat ) {
     divChecked.classList.toggle( "category-card-checked", parentCat.getState() )
     if ( divChecked.classList.contains( "category-card-checked" ) && ( !parentCat.getState() ) ) divChecked.classList.remove( "category-card-checked" );
 }
+

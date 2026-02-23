@@ -25,6 +25,14 @@ export class List {
     }
 
     getId() {
-        return this.id
+        return this.id;
+    }
+
+    getDescription() {
+        return this.description;
+    }
+
+    getDate() {
+        return this.dueDate;
     }
 }

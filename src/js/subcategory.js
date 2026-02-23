@@ -40,11 +40,15 @@ export class Subcategory {
     }
 
     getList( id ) {
-        return this.subcats.find( item => item.id === id )
+        return this.subcats.find( item => item.id === id );
     }
 
     getId() {
-        return this.id
+        return this.id;
+    }
+
+    getName() {
+        return this.name;
     }
 
 }

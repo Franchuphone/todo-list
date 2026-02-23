@@ -29,9 +29,12 @@ for ( let i = 0; i <= 5; i++ ) {
     }
 }
 // console.log( projects.cats )
-dom.displayUserHeader( "Franchuphone" );
+
+const user = prompt( "What's your name stranger?" )
+dom.displayUserHeader( user );
 dom.displayMenu( projects.cats );
+dom.displayMain( projects.cats, projects )
 
 listener.handleUserClick();
-listener.queryCategory();
-listener.querySubcategory();
+listener.refreshDisplayMenu();
+listener.addNewCategory();
