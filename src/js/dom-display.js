@@ -1,6 +1,6 @@
 import images from "/src/js/images.js";
-import * as check from "./checkers";
 import * as listeners from "./listeners";
+import { Controller } from "./controller";
 
 // Create the lateral display for categories and subcategories
 
@@ -51,6 +51,7 @@ export function displayMenu( list ) {
 export function displayMain( list, parentCat ) {
     const mainDiv = document.querySelector( "main" );
     mainDiv.innerHTML = "";
+    if ( list.length === 0 ) return mainDiv.textContent = "No pending tasks"
     // console.log( list )
     for ( let i = 0; i < list.length; i++ ) {
         const categoryId = list[ i ].getId();
@@ -75,7 +76,7 @@ export function displayMain( list, parentCat ) {
         editBtn.id = "edit-btn";
         editBtn.append( imgEditBtn );
         listeners.deleteListener( categoryDiv, deleteBtn, parentCat, list[ i ].getId() );
-
+        listeners.editListener( editBtn, parentCat, list[ i ].getId() )
 
         categoryBtnDiv.dataset.id = categoryId;
         categoryBtnDiv.classList.add( "category-interactions" );
@@ -90,6 +91,7 @@ export function displayMain( list, parentCat ) {
         categoryDiv.append( categoryDetails );
         mainDiv.append( categoryDiv );
 
+        if ( ( parentCat instanceof Controller ) && ( parentCat.getAllCats()[ i ].getId() === "0" ) ) deleteBtn.remove();
         if ( list[ i ].description ) categoryDescription.textContent = list[ i ].getDescription();
         else displayListItems( list[ i ], list[ i ].subcats, categoryDescription );
     }

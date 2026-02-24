@@ -16,6 +16,7 @@ export class Category {
     createSubcat( name ) {
         const subcat = new Subcategory( name );
         this.subcats.push( subcat );
+        return subcat
     }
 
 
