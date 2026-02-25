@@ -104,10 +104,12 @@ export function displayUserHeader( user ) {
     const userIcon = document.createElement( "img" );
     const userName = document.createElement( "button" );
 
+    if ( !user || user == "null" ) user = "John Doe";
     userName.id = "user";
     userName.textContent = user;
     userIcon.src = images[ "user.svg" ];
     userIcon.alt = "User icon";
+    userHeader.innerHTML = "";
     userHeader.append( userIcon, userName );
 }
 

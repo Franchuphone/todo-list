@@ -60,6 +60,7 @@ header {
     align-items: center;
     font-size: calc(1.5 * var(--size-pri));
     font-weight: var(--weight-pri);
+    z-index: 1;
 
     img {
         height: 70%;
@@ -67,14 +68,16 @@ header {
         justify-self: right;
     }
 
+    img:hover {
+        cursor: pointer;
+    }
+
     #user {
         color: black;
         justify-self: left;
-        cursor: none;
         scale: 1;
         max-width: 15ch;
         font-weight: var(--weight-pri);
-        z-index: 1;
     }
 }
 
@@ -599,7 +602,8 @@ details p input:checked {
     .timer-content,
     .nav-content,
     .timer-menu {
-        padding: 0;
+        padding-left: 0;
+        padding-right: 0;
     }
 
 

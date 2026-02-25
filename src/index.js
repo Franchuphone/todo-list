@@ -29,12 +29,14 @@ else {
     } );
 }
 
-const user = prompt( "What's your name stranger?" );
+let user;
+if ( localStorage.getItem( "user" ) ) user = localStorage.getItem( "user" );
 dom.displayUserHeader( user );
 dom.displayMenu( projects.getAllCats() );
 dom.displayMain( projects.getAllCats(), projects )
 
-listener.handleAllProjects( projects );
+listener.handleAllProjects();
+listener.handleUserClick();
 listener.refreshDisplayMenu();
 listener.addNewCategory();
 listener.addNewList();

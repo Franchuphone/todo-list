@@ -40,8 +40,21 @@ export function editListener( elementDiv, parentCat, id ) {
 
 // All projects btn interaction
 export function handleAllProjects() {
-    document.querySelector( "#upcoming-events" ).addEventListener( "click", () => dom.displayMain( projects.cats, projects ) );
+    const upcomingBtn = document.querySelectorAll( "#upcoming-events" );
+    upcomingBtn.forEach( ( e ) => e.addEventListener( "click", () => dom.displayMain( projects.cats, projects ) ) );
 };
+
+
+// Change name on user btn intercation
+export function handleUserClick() {
+    const userBtn = document.querySelector( ".user-header" );
+    userBtn.addEventListener( "click", () => {
+        const oldUser = document.querySelector( "#user" );
+        const newUser = prompt( "Do you want to change your name?", oldUser.textContent );
+        localStorage.setItem( "user", newUser )
+        dom.displayUserHeader( newUser );
+    } )
+}
 
 
 // Lateral menu categories interaction
