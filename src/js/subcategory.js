@@ -1,21 +1,28 @@
 import { List } from "./list";
 
 export class Subcategory {
-    constructor ( name ) {
+    constructor ( name, dueDate = null ) {
         this.name = name;
         this.subcats = [];
         this.state = false;
+        this.dueDate = dueDate;
         this.id = crypto.randomUUID();
     }
 
-    editSubcat( name ) {
+    editSubcat( name, dueDate ) {
         this.name = name;
+        this.dueDate = dueDate;
     }
 
-    createList( description, state = false, dueDate = null ) {
-        const list = new List( description, state, dueDate )
+    createList( description, state = false ) {
+        const list = new List( description, state )
         this.subcats.push( list );
         return list;
+    }
+
+    deleteList( id ) {
+        const index = this.lists.findIndex( item => item.id === id )
+        this.lists.splice( index, 1 )
     }
 
     delete( id ) {
@@ -49,6 +56,10 @@ export class Subcategory {
 
     getName() {
         return this.name;
+    }
+
+    getDate() {
+        return this.dueDate;
     }
 
 }

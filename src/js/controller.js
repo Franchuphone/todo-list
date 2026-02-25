@@ -1,5 +1,5 @@
 import { Category } from "./category";
-import * as dom from "./dom-display";
+// import * as dom from "./dom-display";
 
 export class Controller {
 
@@ -24,5 +24,9 @@ export class Controller {
 
     getCat( id ) {
         return this.cats.find( item => item.id === id );
+    }
+
+    saveData() {
+        localStorage.setItem( "projects", JSON.stringify( this ) );
     }
 }

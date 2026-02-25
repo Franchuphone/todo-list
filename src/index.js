@@ -5,38 +5,40 @@ import images from "/src/js/images.js";
 import { Controller } from "./js/controller";
 import * as dom from "./js/dom-display";
 import * as listener from "./js/listeners"
+import { Category } from "./js/category";
+import { Subcategory } from "./js/subcategory";
+import { List } from "./js/list";
 
 // Initilizes app and creates root project (not removable)
-export const projects = new Controller();
-projects.createCat( "main project", "your place for all your ideas" ).cleanEntries();
-projects.cats[ 0 ].id = "0";
+let projects;
 
-// projects.createCat( "another Common", "another place" ).cleanEntries();
-// for ( let i = 0; i <= 5; i++ ) {
-//     projects.cats[ 0 ].createSubcat( `place ${ i } ` );
-//     projects.cats[ 0 ].subcats[ i ].cleanEntries();
-//     for ( let j = 0; j <= Math.floor( Math.random() * 3 ) + 1; j++ ) {
-//         projects.cats[ 0 ].subcats[ i ].createList( `subcat ${ i } element ${ j }` )
-//         projects.cats[ 0 ].subcats[ i ].subcats[ j ].cleanEntries();
-//     }
-// }
-// for ( let i = 0; i <= 5; i++ ) {
-//     projects.cats[ 1 ].createSubcat( `place ${ i } ` );
-//     projects.cats[ 1 ].subcats[ i ].cleanEntries();
-//     for ( let j = 0; j <= Math.floor( Math.random() * 3 ) + 1; j++ ) {
-//         projects.cats[ 1 ].subcats[ i ].createList( `subcat ${ i } element ${ j }` )
-//         projects.cats[ 1 ].subcats[ i ].subcats[ j ].cleanEntries();
+if ( !localStorage.getItem( "projects" ) ) {
+    projects = new Controller();
+    projects.createCat( "main project", "your place for all your ideas" ).cleanEntries();
+    projects.getAllCats()[ 0 ].setId( "0" );
+}
+else {
+    projects = JSON.parse( localStorage.getItem( "projects" ) );
+    Object.setPrototypeOf( projects, Controller.prototype );
+    projects.getAllCats().forEach( cat => {
+        Object.setPrototypeOf( cat, Category.prototype );
+        cat.getAllSubcats().forEach( subcat => {
+            Object.setPrototypeOf( subcat, Subcategory.prototype );
+            subcat.getAllLists().forEach( list => Object.setPrototypeOf( list, List.prototype ) )
+        } )
+    } );
+}
 
-//     }
-// }
-// console.log( projects.cats[ 0 ].id )
-
-const user = "Fran" // prompt( "What's your name stranger?" )
+const user = prompt( "What's your name stranger?" );
 dom.displayUserHeader( user );
-dom.displayMenu( projects.cats );
-dom.displayMain( projects.cats, projects )
+dom.displayMenu( projects.getAllCats() );
+dom.displayMain( projects.getAllCats(), projects )
 
-listener.handleUserClick( projects );
-listener.refreshDisplayMenu( projects );
-listener.addNewCategory( projects );
-listener.addNewList( projects );
+listener.handleAllProjects( projects );
+listener.refreshDisplayMenu();
+listener.addNewCategory();
+listener.addNewList();
+listener.saveData();
+
+
+export { projects };

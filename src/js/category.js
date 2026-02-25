@@ -13,21 +13,28 @@ export class Category {
         this.description = description;
     }
 
-    createSubcat( name ) {
-        const subcat = new Subcategory( name );
+    editSubcats( newSubcat ) {
+        this.subcats.push( newSubcat );
+    }
+
+    setId( id ) {
+        this.id = id;
+    }
+
+    createSubcat( name, dueDate ) {
+        const subcat = new Subcategory( name, dueDate );
         this.subcats.push( subcat );
         return subcat
     }
 
+    deleteSubcat( id ) {
+        const index = this.subcats.findIndex( item => item.id === id )
+        this.lists.subcats( index, 1 )
+    }
 
     delete( id ) {
         const index = this.subcats.findIndex( item => item.id === id )
         this.subcats.splice( index, 1 )
-    }
-
-    deleteList( id ) {
-        const index = this.lists.findIndex( item => item.id === id )
-        this.lists.splice( index, 1 )
     }
 
     cleanEntries() {

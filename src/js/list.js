@@ -1,15 +1,12 @@
 export class List {
-    constructor ( description = null, state = false, dueDate = null ) {
+    constructor ( description = null, state = false ) {
         this.description = description;
-        this.dueDate = dueDate;
         this.state = state;
         this.id = crypto.randomUUID();
     }
 
-    editList( description, state = false, dueDate = null ) {
+    changeDescription( description ) {
         this.description = description;
-        this.state = state;
-        this.dueDate = dueDate;
     }
 
     changeState() {
@@ -32,7 +29,4 @@ export class List {
         return this.description;
     }
 
-    getDate() {
-        return this.dueDate;
-    }
 }
