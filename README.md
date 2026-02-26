@@ -1,6 +1,8 @@
 <div align="center">
 
-# <img src="https://www.theodinproject.com/assets/icons/odin-icon-22b41941.svg">  Todo List
+# <img src="https://www.theodinproject.com/assets/icons/odin-icon-22b41941.svg"> <br>
+
+# Todo List
 
 **A simple, yet powerful, client-side To-Do list application built with vanilla JavaScript and Webpack.**
 **Part of The Odin Project, FullStack Javascript courses**
@@ -25,17 +27,11 @@ The Todo List project is a straightforward web application designed to help user
 
 **Frontend:**
 
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
-
-![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
-
-![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black) ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white) ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 
 **Build Tools:**
 
-![Webpack](https://img.shields.io/badge/Webpack-8DD6F9?style=for-the-badge&logo=webpack&logoColor=black)
-
-![npm](https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white)
+![Webpack](https://img.shields.io/badge/Webpack-8DD6F9?style=for-the-badge&logo=webpack&logoColor=black) ![npm](https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white)
 
 ## 🚀 Quick Start
 
