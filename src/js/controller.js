@@ -1,5 +1,4 @@
 import { Category } from "./category";
-// import * as dom from "./dom-display";
 
 export class Controller {
 

@@ -2,6 +2,7 @@ import * as dom from "./dom-display"
 import { projects } from "..";
 import { Subcategory } from "./subcategory";
 import { Controller } from "./controller";
+import { differenceInDays, format, formatDistanceToNowStrict, parseISO } from "date-fns";
 
 
 // Delete button interaction
@@ -40,7 +41,7 @@ export function editListener( elementDiv, parentCat, id ) {
 
 // All projects btn interaction
 export function handleAllProjectsBtn() {
-    const upcomingBtn = document.querySelectorAll( "#upcoming-events" );
+    const upcomingBtn = document.querySelectorAll( "#all-projects" );
     upcomingBtn.forEach( ( e ) => e.addEventListener( "click", () => dom.displayMain( projects.cats, projects ) ) );
 };
 
@@ -53,6 +54,37 @@ export function handleUserBtn() {
         const newUser = prompt( "Do you want to change your name?", oldUser.textContent );
         localStorage.setItem( "user", newUser )
         dom.displayUserHeader( newUser );
+    } )
+}
+
+// Display tasks with due date of today
+export function handleTodayBtn() {
+    const todayBtn = document.querySelectorAll( "#today-events" );
+    todayBtn.forEach( ( e ) => {
+        e.addEventListener( "click", () => {
+            const todaySubcats = [];
+            const today = format( new Date(), "yyyy-MM-dd" );
+            exportAllSubcats().forEach( subcat => {
+                if ( subcat.getDate() === today ) todaySubcats.push( subcat )
+            } );
+            dom.displayMain( todaySubcats )
+        } );
+    } )
+}
+
+// Display tasks with due date in the 7 next days
+export function handleUpcomingBtn() {
+    const upcomingBtn = document.querySelectorAll( "#upcoming-events" );
+    upcomingBtn.forEach( ( e ) => {
+        e.addEventListener( "click", () => {
+            const upcomingSubcats = [];
+            exportAllSubcats().forEach( subcat => {
+                const today = new Date();
+                const dueDate = parseISO( subcat.getDate() );
+                if ( differenceInDays( dueDate, today ) <= 7 ) upcomingSubcats.push( subcat );
+            } );
+            dom.displayMain( upcomingSubcats )
+        } );
     } )
 }
 
@@ -112,7 +144,7 @@ export function addNewList() {
         // const form = document.getElementById( "list-form" );
         // console.log( "new-btn", form )
         // form.reset();
-        addNewDefaultDate( dateBox );
+        dom.addNewDefaultDate( dateBox );
         addProjectInSelectBox( selectBox, projects );
         dialog.showModal();
         closeProjectDialog( dialog );
@@ -135,11 +167,6 @@ function closeProjectDialog( dialog ) {
         e.preventDefault();
         dialog.close();
     } );
-}
-
-function addNewDefaultDate( dateDiv ) {
-    dateDiv.innerHTML = "";
-    dateDiv.valueAsDate = new Date();
 }
 
 function addProjectInSelectBox( select, projects ) {
@@ -166,7 +193,7 @@ function handleCategoryForm( dialog, id ) {
             e.preventDefault();
             projects.getCat( id ).editCat( title.value, description.value );
             refreshDisplayOnSubmission( dialog, form, projects.cats, projects );
-            console.log( projects )
+            // console.log( projects )
         } );
     } else {
         button.textContent = "Add Project"
@@ -185,7 +212,7 @@ function handleListForm( dialog, date, select, id, parentCat ) {
     const form = document.getElementById( "list-form" );
     const button = document.querySelector( "#list-dialog #submit-form" );
 
-    // Editing existing task list
+    // Edit existing task list
     if ( id ) {
         const subcat = parentCat.getSubcat( id );
         title.value = subcat.getName();
@@ -206,7 +233,7 @@ function handleListForm( dialog, date, select, id, parentCat ) {
             // console.log( parentCat, cat )
             if ( !form.checkValidity() ) return;
             e.preventDefault();
-            subcat.editSubcat( title.value, date.value );
+            subcat.editSubcat( title.value, date.value, idCat );
             for ( let i = 1; i <= 5; i++ ) {
                 const list = subcat.getAllLists()[ i - 1 ]
                 // console.log( list )
@@ -216,14 +243,11 @@ function handleListForm( dialog, date, select, id, parentCat ) {
             // console.log( subcat )
             changeParentCat( subcat, parentCat, cat )
             refreshDisplayOnSubmission( dialog, form, cat.getAllSubcats(), cat, id, date, select );
-
             // console.log( parentCat );
-
-
         } )
     }
 
-    // Creating new task list
+    // Create new task list
     else {
         button.textContent = "New tasks";
         form.addEventListener( "submit", ( e ) => {
@@ -259,7 +283,7 @@ function refreshDisplayOnSubmission( dialog, form, list, parentCat, idSubcat, da
     dom.displayMenu( projects.cats );
     if ( idSubcat ) {
         dom.openSubcatDetails( idSubcat );
-        addNewDefaultDate( date );
+        dom.addNewDefaultDate( date );
         addProjectInSelectBox( select, projects );
         const btn = document.querySelector( "#add-list" );
         btn.replaceWith( btn.cloneNode( true ) );
@@ -271,4 +295,15 @@ function refreshDisplayOnSubmission( dialog, form, list, parentCat, idSubcat, da
 function changeParentCat( subcat, oldCat, newCat ) {
     oldCat.delete( subcat.getId() );
     newCat.editSubcats( subcat );
+}
+
+function exportAllSubcats() {
+    const allSubcats = [];
+    projects.getAllCats().forEach( ( cat ) => {
+        cat.getAllSubcats().forEach( ( subcat ) => {
+            allSubcats.push( subcat )
+            // console.log( subcat )
+        } )
+    } )
+    return allSubcats;
 }

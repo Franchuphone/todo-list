@@ -1,17 +1,19 @@
 import { List } from "./list";
 
 export class Subcategory {
-    constructor ( name, dueDate = null ) {
+    constructor ( name, dueDate = null, catId ) {
         this.name = name;
         this.subcats = [];
         this.state = false;
         this.dueDate = dueDate;
         this.id = crypto.randomUUID();
+        this.catId = catId;
     }
 
-    editSubcat( name, dueDate ) {
+    editSubcat( name, dueDate, id ) {
         this.name = name;
         this.dueDate = dueDate;
+        this.catId = id;
     }
 
     createList( description, state = false ) {
@@ -52,6 +54,10 @@ export class Subcategory {
 
     getId() {
         return this.id;
+    }
+
+    getCatId() {
+        return this.catId;
     }
 
     getName() {

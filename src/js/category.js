@@ -22,7 +22,7 @@ export class Category {
     }
 
     createSubcat( name, dueDate ) {
-        const subcat = new Subcategory( name, dueDate );
+        const subcat = new Subcategory( name, dueDate, this.id );
         this.subcats.push( subcat );
         return subcat
     }
@@ -63,11 +63,3 @@ export class Category {
     }
 
 }
-
-
-
-
-
-// const commonCategory = new Category( "Common", "Your main place where all your projects can begin" )
-// let catList = [];
-// let subcatList = [];

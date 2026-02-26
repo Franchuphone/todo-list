@@ -9,9 +9,9 @@ import { Category } from "./js/category";
 import { Subcategory } from "./js/subcategory";
 import { List } from "./js/list";
 
-// Initilizes app and creates root project (not removable)
+// Initialize app and create root project (not removable)
 let projects;
-
+// localStorage.clear()
 if ( !localStorage.getItem( "projects" ) ) {
     projects = new Controller();
     projects.createCat( "main project", "your place for all your ideas" ).cleanEntries();
@@ -34,9 +34,12 @@ if ( localStorage.getItem( "user" ) ) user = localStorage.getItem( "user" );
 dom.displayUserHeader( user );
 dom.displayMenu( projects.getAllCats() );
 dom.displayMain( projects.getAllCats(), projects )
+// console.log( projects.getAllCats() )
 
 listener.handleAllProjectsBtn();
 listener.handleUserBtn();
+listener.handleTodayBtn();
+listener.handleUpcomingBtn();
 listener.refreshDisplayMenu();
 listener.addNewCategory();
 listener.addNewList();
