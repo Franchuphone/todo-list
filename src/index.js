@@ -35,8 +35,8 @@ dom.displayUserHeader( user );
 dom.displayMenu( projects.getAllCats() );
 dom.displayMain( projects.getAllCats(), projects )
 
-listener.handleAllProjects();
-listener.handleUserClick();
+listener.handleAllProjectsBtn();
+listener.handleUserBtn();
 listener.refreshDisplayMenu();
 listener.addNewCategory();
 listener.addNewList();

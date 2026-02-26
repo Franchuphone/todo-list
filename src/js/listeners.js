@@ -39,14 +39,14 @@ export function editListener( elementDiv, parentCat, id ) {
 }
 
 // All projects btn interaction
-export function handleAllProjects() {
+export function handleAllProjectsBtn() {
     const upcomingBtn = document.querySelectorAll( "#upcoming-events" );
     upcomingBtn.forEach( ( e ) => e.addEventListener( "click", () => dom.displayMain( projects.cats, projects ) ) );
 };
 
 
 // Change name on user btn intercation
-export function handleUserClick() {
+export function handleUserBtn() {
     const userBtn = document.querySelector( ".user-header" );
     userBtn.addEventListener( "click", () => {
         const oldUser = document.querySelector( "#user" );
