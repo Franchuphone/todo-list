@@ -4,6 +4,14 @@ import { Controller } from "./controller";
 import { Subcategory } from "./subcategory";
 import { projects } from "..";
 import { format, parseISO } from "date-fns";
+import html from "/src/after-load.html"
+
+
+// Prevent display bug on page load
+export function InitialDisplay() {
+    const body = document.querySelector( "body" );
+    body.innerHTML = html;
+}
 
 // Create lateral display for categories and subcategories
 export function displayMenu( list ) {

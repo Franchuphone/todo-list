@@ -11,6 +11,7 @@ import * as listener from "./js/listeners";
 // Initialize app and create root project (not removable)
 let projects;
 let user;
+dom.InitialDisplay();
 
 if ( !localStorage.getItem( "projects" ) ) {
     projects = new Controller();
