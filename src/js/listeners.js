@@ -51,6 +51,7 @@ export function handleNameBtn() {
         const userName = userInput.value;
         dom.displayUserHeader( userName );
         dom.displayMain( projects.getAllCats(), projects );
+        localStorage.setItem( "user", userName )
     } );
 }
 

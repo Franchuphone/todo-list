@@ -21,6 +21,7 @@ if ( !localStorage.getItem( "projects" ) ) {
 }
 else {
     projects = JSON.parse( localStorage.getItem( "projects" ) );
+    user = localStorage.getItem( "user" );
     Object.setPrototypeOf( projects, Controller.prototype );
     projects.getAllCats().forEach( cat => {
         Object.setPrototypeOf( cat, Category.prototype );
@@ -33,7 +34,7 @@ else {
     dom.displayMain( projects.getAllCats(), projects );
 }
 
-if ( localStorage.getItem( "user" ) ) user = localStorage.getItem( "user" );
+// if ( localStorage.getItem( "user" ) ) user = localStorage.getItem( "user" );
 
 // Initial interface display load
 dom.displayMenu( projects.getAllCats() );
