@@ -21,13 +21,23 @@ The Todo List project is a straightforward web application designed to help user
 -   ✅ **Mark Tasks as Complete**: Toggle tasks between complete and incomplete states.
 -   🗑️ **Delete Tasks**: Remove tasks from the list once they are no longer needed.
 -   📝 **Task Display**: Clearly displays all active and completed tasks.
+-   📅 **Due Dates**: Assign due dates to tasks, leveraging `date-fns` for robust date handling.
+-   🔄 **Dynamic UI Updates**: Instantly reflect changes in the user interface without page reloads.
+-   💾 **Local Storage Persistence**: Automatically save and load to-do data from the browser's local 
+
+## 🔧 Future improvements
+
+- 🎯 **Add colour to expired tasks**: quickly see if tasks are expired or not.
+- 🎯 **Change tasks order**: list of tasks are currently ordered in a project by their creation date, not by their due date.
+- 🎯 **Dynamic colour on menu elements**: change the colour of elements on lateral menu depending on their state (neutral, expired, achieved).
+- 🎯 **Filter by date**: a click on a date will display all the tasks with the same due date.
 
 
 ## 🛠️ Tech Stack
 
 **Frontend:**
 
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black) ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white) ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black) ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white) ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white) ![date-fns](https://img.shields.io/badge/date--fns-F0E8C7?style=for-the-badge&logo=date-fns&logoColor=black)
 
 **Build Tools:**
 

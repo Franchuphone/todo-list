@@ -79,7 +79,6 @@ export function displayMain( list, parentCat ) {
             const dueDate = parseISO( list[ i ].getDate() );
             categoryDate.textContent = format( dueDate, "E d MMM yyyy" );
             categoryDate.classList.add( "date" );
-            console.log( "pass" );
         }
 
         // Create edit and delete buttons with listeners
