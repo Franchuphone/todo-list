@@ -17,13 +17,13 @@ The Todo List project is a straightforward web application designed to help user
 
 ## ✨ Features
 
--   🎯 **Add New Tasks**: Quickly add new to-do items to your list.
--   ✅ **Mark Tasks as Complete**: Toggle tasks between complete and incomplete states.
--   🗑️ **Delete Tasks**: Remove tasks from the list once they are no longer needed.
--   📝 **Task Display**: Clearly displays all active and completed tasks.
--   📅 **Due Dates**: Assign due dates to tasks, leveraging `date-fns` for robust date handling.
--   🔄 **Dynamic UI Updates**: Instantly reflect changes in the user interface without page reloads.
--   💾 **Local Storage Persistence**: Automatically save and load to-do data from the browser's local 
+- 🎯 **Add New Tasks**: Quickly add new to-do items to your list.
+- ✅ **Mark Tasks as Complete**: Toggle tasks between complete and incomplete states.
+- 🗑️ **Delete Tasks**: Remove tasks from the list once they are no longer needed.
+- 📝 **Task Display**: Clearly displays all active and completed tasks.
+- 📅 **Due Dates**: Assign due dates to tasks, leveraging `date-fns` for robust date handling.
+- 🔄 **Dynamic UI Updates**: Instantly reflect changes in the user interface without page reloads.
+- 💾 **Local Storage Persistence**: Automatically save and load to-do data from the browser's local
 
 ## 🔧 Future improvements
 
@@ -31,7 +31,6 @@ The Todo List project is a straightforward web application designed to help user
 - 🎯 **Change tasks order**: list of tasks are currently ordered in a project by their creation date, not by their due date.
 - 🎯 **Dynamic colour on menu elements**: change the colour of elements on lateral menu depending on their state (neutral, expired, achieved).
 - 🎯 **Filter by date**: a click on a date will display all the tasks with the same due date.
-
 
 ## 🛠️ Tech Stack
 
@@ -46,23 +45,28 @@ The Todo List project is a straightforward web application designed to help user
 ## 🚀 Quick Start
 
 ### Prerequisites
+
 Before you begin, ensure you have the following installed:
--   **Node.js**: `^14.x.x` or higher (includes npm)
+
+- **Node.js**: `^14.x.x` or higher (includes npm)
 
 ### Installation
 
 1.  **Clone the repository**
+
     ```bash
     git clone https://github.com/Franchuphone/todo-list.git
     cd todo-list
     ```
 
 2.  **Install dependencies**
+
     ```bash
     npm install
     ```
 
 3.  **Start development server**
+
     ```bash
     npm run start
     ```
@@ -85,15 +89,19 @@ todo-list/
 ## ⚙️ Configuration
 
 ### Webpack Configuration
+
 This project uses Webpack for bundling. The configuration is split into three files:
--   `webpack.common.js`: Contains shared configuration for both development and production.
--   `webpack.dev.js`: Extends `webpack.common.js` with development-specific settings (e.g., `webpack-dev-server`).
--   `webpack.prod.js`: Extends `webpack.common.js` with production-specific optimizations (e.g., minification).
+
+- `webpack.common.js`: Contains shared configuration for both development and production.
+- `webpack.dev.js`: Extends `webpack.common.js` with development-specific settings (e.g., `webpack-dev-server`).
+- `webpack.prod.js`: Extends `webpack.common.js` with production-specific optimizations (e.g., minification).
 
 You can modify these files to adjust build processes, loaders, plugins, and output settings.
 
 ### Development Workflow
+
 To contribute or further develop this project:
+
 1.  Ensure all prerequisites are met and dependencies are installed.
 2.  `npm run start` to open the application in development mode with live reloading.
 3.  Make changes in the `src/` directory. Webpack will automatically recompile and refresh your browser.
@@ -101,15 +109,20 @@ To contribute or further develop this project:
 ## 🚀 Deployment
 
 ### Production Build
+
 To create an optimized, minified build of the application for production:
+
 ```bash
 npm run build
 ```
+
 This command will output the production-ready static files into the `dist/` directory (as configured in `webpack.prod.js`), which can then be deployed to any static web hosting service.
 
 ### Deployment Options
+
 The generated static files can be deployed using various methods:
--   **Static Hosting**: Services like Netlify, Vercel, GitHub Pages, or AWS S3. Simply upload the contents of the `dist/` folder.
+
+- **Static Hosting**: Services like Netlify, Vercel, GitHub Pages, or AWS S3. Simply upload the contents of the `dist/` folder.
 
 ## 🤝 Contributing
 
@@ -121,6 +134,7 @@ We welcome contributions to enhance this Todo List application! Please consider 
 4.  Push your branch and open a pull request.
 
 ### Development Setup for Contributors
+
 The development setup is straightforward, as outlined in the [Quick Start](#-quick-start) section. Ensure your local environment is set up correctly before submitting changes.
 
 ## 📄 License
@@ -129,13 +143,13 @@ This project is licensed under the [ISC License](LICENSE) - see the LICENSE file
 
 ## 🙏 Acknowledgments
 
--   **Webpack**: For powerful module bundling.
--   **npm**: For package management.
+- **Webpack**: For powerful module bundling.
+- **npm**: For package management.
 
 ## 📞 Support & Contact
 
--   🐛 Issues: [GitHub Issues](https://github.com/Franchuphone/todo-list/issues)
--   📧 Contact: [LinkedIn](https://chk.me/fDTZdvK)
+- 🐛 Issues: [GitHub Issues](https://github.com/Franchuphone/todo-list/issues)
+- 📧 Contact: [LinkedIn](https://chk.me/fDTZdvK)
 
 ---
 
@@ -146,4 +160,3 @@ This project is licensed under the [ISC License](LICENSE) - see the LICENSE file
 Made with ❤️ by Franchuphone
 
 </div>
-

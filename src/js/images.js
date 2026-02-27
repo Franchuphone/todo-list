@@ -1,12 +1,14 @@
-function importAll( r ) {
-    const map = {};
-    r.keys().forEach( key => {
-        const cleanKey = key.replace( './', '' );
-        map[ cleanKey ] = r( key );
-    } );
-    return map;
+function importAll(r) {
+  const map = {};
+  r.keys().forEach((key) => {
+    const cleanKey = key.replace("./", "");
+    map[cleanKey] = r(key);
+  });
+  return map;
 }
 
-const images = importAll( require.context( '/src/img', false, /\.(png|jpe?g|svg)$/ ) );
+const images = importAll(
+  require.context("/src/img", false, /\.(png|jpe?g|svg)$/),
+);
 
 export default images;
