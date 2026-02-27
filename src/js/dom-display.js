@@ -1,10 +1,10 @@
-import images from "/src/js/images.js";
+import images from "../js/images";
 import * as listeners from "./listeners";
 import { Controller } from "./controller";
 import { Subcategory } from "./subcategory";
 import { projects } from "..";
 import { format, parseISO } from "date-fns";
-import html from "/src/after-load.html"
+import html from "../after-load.html"
 
 
 // Prevent display bug on page load
