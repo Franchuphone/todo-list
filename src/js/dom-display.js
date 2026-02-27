@@ -6,7 +6,6 @@ import { projects } from "..";
 import { format, parseISO } from "date-fns";
 
 // Create lateral display for categories and subcategories
-
 export function displayMenu( list ) {
     const navDiv = document.querySelector( ".nav-content" );
     navDiv.innerHTML = "";
@@ -50,12 +49,10 @@ export function displayMenu( list ) {
 }
 
 // Create main structure display for categories and subcategories and their content
-
 export function displayMain( list, parentCat ) {
     const mainDiv = document.querySelector( "main" );
     mainDiv.innerHTML = "";
     if ( list.length === 0 ) return mainDiv.textContent = "No pending tasks";
-    // console.log( list instanceof Subcategory )
     for ( let i = 0; i < list.length; i++ ) {
         const categoryId = list[ i ].getId();
         const categoryDiv = document.createElement( "div" );
@@ -78,7 +75,6 @@ export function displayMain( list, parentCat ) {
         }
 
         // Create edit and delete buttons with listeners
-
         imgDeleteBtn.src = images[ "trash.svg" ];
         imgDeleteBtn.alt = "Trash icon";
         deleteBtn.id = "delete-btn";
@@ -111,7 +107,6 @@ export function displayMain( list, parentCat ) {
 }
 
 // Create dynamic user header display to prevent a bug on first page load
-
 export function displayUserHeader( user ) {
     const userHeader = document.querySelector( ".user-header" );
     const userIcon = document.createElement( "img" );
@@ -127,7 +122,6 @@ export function displayUserHeader( user ) {
 }
 
 // Open corresponding subcategory on menu click
-
 export function openSubcatDetails( id ) {
     const details = document.querySelectorAll( "main details" )
     details.forEach( ( detail ) => {
@@ -137,7 +131,6 @@ export function openSubcatDetails( id ) {
 }
 
 // Create date format for calendar
-
 export function addNewDefaultDate( dateDiv ) {
     dateDiv.innerHTML = "";
     const today = new Date()
@@ -146,7 +139,6 @@ export function addNewDefaultDate( dateDiv ) {
 }
 
 // Toggle visual validation state on subcategory
-
 export function displayCategoryChecked( parentCat ) {
     const divChecked = document.querySelector( `main > div[data-id='${ parentCat.getId() }']` );
     divChecked.classList.toggle( "category-card-checked", parentCat.getState() )
@@ -154,7 +146,6 @@ export function displayCategoryChecked( parentCat ) {
 }
 
 // Create main structure display for lowest level items
-
 function displayListItems( parentCat, list, div ) {
     for ( let j = 0; j < list.length; j++ ) {
         if ( !( "getDescription" in Object.getPrototypeOf( list[ j ] ) ) ) continue;
@@ -165,16 +156,13 @@ function displayListItems( parentCat, list, div ) {
         inputList.type = "checkbox";
         inputList.name = `list${ j }`;
         if ( list[ j ].getState() ) inputList.checked = true;
-        // console.log( parentCat.getState() )
         listeners.handleCheckbox( inputList, list[ j ], parentCat );
         // displayCategoryChecked( inputList, parentCat );
-        // console.log( list, parentCat )
         inputLabel.dataset.id = list[ j ].getId();
         inputLabel.textContent = list[ j ].getDescription();
         inputLabel.for = `list${ j }`;
         div.append( inputList, inputLabel );
         div.classList.add( "list-display" );
-        // console.log( parentCat.getId() )
         displayCategoryChecked( parentCat );
     }
 }

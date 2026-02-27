@@ -1,21 +1,22 @@
 import "./css/modern-normalize.css"
 import "./css/main-style.css"
-import images from "/src/js/images.js";
 
 import { Controller } from "./js/controller";
-import * as dom from "./js/dom-display";
-import * as listener from "./js/listeners"
 import { Category } from "./js/category";
 import { Subcategory } from "./js/subcategory";
 import { List } from "./js/list";
+import * as dom from "./js/dom-display";
+import * as listener from "./js/listeners";
 
 // Initialize app and create root project (not removable)
 let projects;
-// localStorage.clear()
+let user;
+
 if ( !localStorage.getItem( "projects" ) ) {
     projects = new Controller();
     projects.createCat( "main project", "your place for all your ideas" ).cleanEntries();
     projects.getAllCats()[ 0 ].setId( "0" );
+    user = listener.handleNameBtn();
 }
 else {
     projects = JSON.parse( localStorage.getItem( "projects" ) );
@@ -24,22 +25,24 @@ else {
         Object.setPrototypeOf( cat, Category.prototype );
         cat.getAllSubcats().forEach( subcat => {
             Object.setPrototypeOf( subcat, Subcategory.prototype );
-            subcat.getAllLists().forEach( list => Object.setPrototypeOf( list, List.prototype ) )
+            subcat.getAllLists().forEach( list => Object.setPrototypeOf( list, List.prototype ) );
         } )
     } );
+    dom.displayUserHeader( user );
+    dom.displayMain( projects.getAllCats(), projects );
 }
 
-let user;
 if ( localStorage.getItem( "user" ) ) user = localStorage.getItem( "user" );
-dom.displayUserHeader( user );
+
+// Initial interface display load
 dom.displayMenu( projects.getAllCats() );
-dom.displayMain( projects.getAllCats(), projects )
-// console.log( projects.getAllCats() )
+
 
 listener.handleAllProjectsBtn();
 listener.handleUserBtn();
 listener.handleTodayBtn();
 listener.handleUpcomingBtn();
+listener.handleExpiredBtn();
 listener.refreshDisplayMenu();
 listener.addNewCategory();
 listener.addNewList();

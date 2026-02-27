@@ -69,7 +69,7 @@
                             </div>
                             <div class="form-input">
                                 <label for="list-duedate">Due Date:</label>
-                                <input type="date" id="list-duedate" name="list-duedate">
+                                <input type="date" id="list-duedate" name="list-duedate" required>
                             </div>
                             <div class="form-input">
                                 <label for="project-choice">Add tasks to project </label>
@@ -90,6 +90,8 @@
                     <div class="timer-menu">
                         <img src="./img/infinity.svg" alt="An infinity symbol" id="all-projects">
                         <button id="all-projects">All your projects</button>
+                        <img src="./img/alert-decagram-outline.svg" alt="An alert icon" id="expired-events">
+                        <button id="expired-events">Expired</button>
                         <img src="./img/timer-sand.svg" alt="Timer sand with some sand" id="today-events">
                         <button id="today-events">Due Today</button>
                         <img src="./img/progress-clock.svg" alt="A clock showing progress" id="upcoming-events">
@@ -101,6 +103,17 @@
             </nav>
 
             <main>
+                <div class="initial-main">
+                    <h1>Welcome in your TODO list organizer</h1>
+                    <p>Here you can add projects and new lists of tasks into projects simply by clicking on top page
+                        buttons.</p>
+                    <p>You can easily access and manage them using the lateral menu.</p>
+                    <p>You have also the possibility to see all your tasks by their due dates.</p>
+                    <p>Once in a project or tasks card, you can edit or delete it by a single click.</p>
+                    <p>If you wish, you can give us a way to name you :</p>
+                    <div><input type="text" id="user-name-input"></div>
+                    <button id="name-me">Name me !</button>
+                </div>
 
             </main>
 
