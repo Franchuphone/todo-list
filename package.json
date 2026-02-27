@@ -9,7 +9,7 @@
     "update": "git checkout prod && git merge main --no-edit",
     "commit": "git add dist -f && git commit -m 'Deployment commit'",
     "deploy": "git subtree push --prefix dist origin prod && git checkout main",
-    "update-deploy": "npm run update && npm run commit && npm run deploy"
+    "update-deploy": "npm run update && npm run build && npm run commit && npm run deploy"
   },
   "repository": {
     "type": "git",
