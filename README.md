@@ -4,7 +4,7 @@
 
 # Todo List
 
-**A simple, yet powerful, client-side To-Do list application built with vanilla JavaScript and Webpack.**
+**A simple, yet powerful, client-side To-Do list application built with vanilla JavaScript and Webpack.**<br>
 **Part of The Odin Project, FullStack Javascript courses**
 
 **[Live Demo](https://franchuphone.github.io/todo-list/)**
