@@ -139,7 +139,7 @@ The development setup is straightforward, as outlined in the [Quick Start](#-qui
 
 ## 📄 License
 
-This project is licensed under the [ISC License](LICENSE) - see the LICENSE file for details. <!-- TODO: Verify or add actual LICENSE file -->
+No particular license, just keep in mind to respect the work of others and just point to this repository for credentials.
 
 ## 🙏 Acknowledgments
 
